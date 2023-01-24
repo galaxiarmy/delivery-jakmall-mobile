@@ -20,8 +20,6 @@ export const getDataJokeByCategory = async (category: any, amount: any) => {
       `https://v2.jokeapi.dev/joke/${category}?type=single&amount=${amount}`,
     );
 
-    console.log(response.status, response.data);
-
     if (response.status === 200) {
       if (response.data.hasOwnProperty('jokes')) {
         return response.data.jokes;
