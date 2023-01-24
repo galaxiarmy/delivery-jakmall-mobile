@@ -5,6 +5,8 @@ import {
   StyleSheet,
   StatusBar,
   Text,
+  View,
+  ActivityIndicator,
 } from 'react-native';
 import ListItemJoke from './components/ListItemJoke';
 import {getDataJoke} from './helper/api';
@@ -36,19 +38,28 @@ const App = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.headerTitle}>Jakmall Application</Text>
-      <FlatList
-        data={dataJoke}
-        renderItem={({item, index}: any) => (
-          <ListItemJoke
-            title={item}
-            number={index}
-            onPressGoTop={() => {
-              onItemClick(index);
-            }}
-          />
-        )}
-        keyExtractor={(item, index) => `${item} ${index}`}
-      />
+      {dataJoke.length === 0 ? (
+        <View style={styles.containerLoading}>
+          <ActivityIndicator size={40} />
+          <Text style={styles.titleConnection}>
+            Membutuhkan Jaringan Internet
+          </Text>
+        </View>
+      ) : (
+        <FlatList
+          data={dataJoke}
+          renderItem={({item, index}: any) => (
+            <ListItemJoke
+              title={item}
+              number={index}
+              onPressGoTop={() => {
+                onItemClick(index);
+              }}
+            />
+          )}
+          keyExtractor={(item, index) => `${item} ${index}`}
+        />
+      )}
     </SafeAreaView>
   );
 };
@@ -72,6 +83,14 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
+  },
+  titleConnection: {
+    fontSize: 20,
+  },
+  containerLoading: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
