@@ -4,7 +4,7 @@ Jakmall Technical
 
 This project use React Native framework, can running on Android and IOS
 
-Node Version : v18.12.1
+Node Version : >= 14
 
 React-Native Version : "0.71.1"
 
