@@ -11,7 +11,7 @@ import {getDataJokeByCategory} from '../../helper/api';
 import IconArrowDown from '../../assets/icons/icons8-sort-down-30.png';
 import IconArrowUp from '../../assets/icons/icons8-sort-up-30.png';
 
-const ListItemJoke = ({title, number}: any) => {
+const ListItemJoke = ({title, number, onPressGoTop}: any) => {
   const [expanded, setExpanded] = useState<any>(false);
   const [dataJoke, setDataJoke] = useState<any>([]);
 
@@ -60,7 +60,7 @@ const ListItemJoke = ({title, number}: any) => {
               <Text>Top</Text>
             </TouchableOpacity>
           ) : (
-            <TouchableOpacity style={styles.buttonOnTop}>
+            <TouchableOpacity onPress={onPressGoTop} style={styles.buttonOnTop}>
               <Text style={styles.titleGoTop}>Go Top</Text>
             </TouchableOpacity>
           )}

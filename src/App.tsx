@@ -18,6 +18,17 @@ const App = () => {
     setDataJoke(dataJokeCategory);
   };
 
+  const onItemClick = (index: any) => {
+    // do nothing on top element
+    if (index !== 0) {
+      let previousItems = [...dataJoke];
+      let temp = previousItems[index - 1];
+      previousItems[index - 1] = previousItems[index];
+      previousItems[index] = temp;
+      setDataJoke(previousItems);
+    }
+  };
+
   useEffect(() => {
     getData();
   }, []);
@@ -28,7 +39,13 @@ const App = () => {
       <FlatList
         data={dataJoke}
         renderItem={({item, index}: any) => (
-          <ListItemJoke title={item} number={index} />
+          <ListItemJoke
+            title={item}
+            number={index}
+            onPressGoTop={() => {
+              onItemClick(index);
+            }}
+          />
         )}
         keyExtractor={(item, index) => `${item} ${index}`}
       />
